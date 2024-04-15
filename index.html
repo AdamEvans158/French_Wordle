@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Wordle</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" defer src="js/index.js"></script>
+</head>
+<body>
+    
+    <!-- Help / Instructions -->
+    <div class="blanket" id="blanket"></div>
+    <div class="instructions-container" id="instructionsContainer">
+        <h2 class="instructions-title">How To Play</h2>
+        
+        <div class="colors-and-properties-container">
+
+            <div class="letter-in-the-correct-place-container property-container">
+                <div class="colored-box box-1"></div>
+                <p class="color-property">This indicates that the letter is in the word <strong>AND</strong> in the correct location.</p>
+            </div>
+
+            <div class="letter-in-the-wrong-position-container property-container">
+                <div class="colored-box box-2"></div>
+                <p class="color-property">This indicates that the letter is in the word <strong>BUT</strong> the letter is in the wrong location.</p>
+            </div>
+
+            <div class="letter-is-not-in-the-word-container property-container">
+                <div class="colored-box box-3"></div>
+                <p class="color-property">This indicates that the letter is not in the word.</p>
+            </div>
+
+            <div class="wrong-accent-container property-container">
+                <div class="colored-box box-4"></div>
+                <p class="color-property">This indicates that the letter is in the word <strong>BUT</strong> you used the wrong accent <strong>OR</strong> included an extra accent</p>
+            </div>
+
+            <div class="count-of-letter-container property-container">
+                <div class="count-box"></div>
+                <p class="count-property">The number in the top right corner of the tile indicates how many times that letter is used in the word. Note that this does not take into consideration accent marks. Thus, if you use an unaccented letter, and it still displays a number greater than zero, it may be referring to that letter <strong>WITH</strong> an accent.</p>
+            </div>
+        </div>
+
+        <div class="open-container">
+            <p class="open-help-menu-instructions">This menu can be accessed anytime you need a reminder of what any of the colors or numbers mean. To open this, please press down <kbd>Shift</kbd>.</p>
+        </div>
+
+        <button class="start-playing-button" id="startPlayingButton">Start Playing</button>
+
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <p class="game-title">Wordle de la Français</p>
+    </div>
+
+    <!-- Game Board -->
+   <main class="game-board" id="gameBoard">
+    <section id="gameRow1" class="game-row1 game-row">
+        <div class="cell-in-row1 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row1 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row1 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row1 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row1 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="gameRow2" class="game-row2 game-row">
+        <div class="cell-in-row2 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row2 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row2 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row2 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row2 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="gameRow3" class="game-row3 game-row">
+        <div class="cell-in-row3 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row3 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row3 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row3 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row3 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="gameRow4" class="game-row4 game-row">
+        <div class="cell-in-row4 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row4 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row4 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row4 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row4 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="gameRow5" class="game-row5 game-row">
+        <div class="cell-in-row5 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row5 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row5 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row5 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row5 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="gameRow6" class="game-row6 game-row">
+        <div class="cell-in-row6 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row6 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row6 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row6 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cell-in-row6 cell">
+            <h1 class="letter"></h1>
+            <div class="cell-back">
+                <div class="number-container">
+                    <p class="number"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+   </main>
+
+    <!-- Keyboard -->
+    <div class="keyboard">
+        <div class="keyboard-row1 keyboard-row">
+            <div data-key class="key" id="qKey">Q</div>
+            <div data-key class="key" id="wKey">W</div>
+            <div data-key class="key" id="eKey">
+                E
+                <div class="e-with-accents-container accent-container">
+                    <div data-key class="accent-e-1 accent-key">é</div>
+                    <div data-key class="accent-e-2 accent-key">è</div>
+                    <div data-key class="accent-e-3 accent-key">ê</div>
+                    <div data-key class="accent-e-4 accent-key">ë</div>
+                </div>
+            </div>
+            <div data-key class="key" id="rKey">R</div>
+            <div data-key class="key" id="tKey">T</div>
+            <div data-key class="key" id="yKey">Y</div>
+            <div data-key class="key" id="uKey">
+                U
+                <div class="u-with-accents-container accent-container">
+                    <div data-key class="accent-u-1 accent-key">ù</div>
+                    <div data-key class="accent-u-2 accent-key">û</div>
+                    <div data-key class="accent-u-3 accent-key">ü</div>
+                </div>
+            </div>
+            <div data-key class="key" id="iKey">
+                I
+                <div class="i-with-accents-container accent-container">
+                    <div data-key class="accent-i-1 accent-key">ì</div>
+                    <div data-key class="accent-i-2 accent-key">î</div>
+                    <div data-key class="accent-i-3 accent-key">ï</div>
+                </div>
+            </div>
+            <div data-key class="key" id="oKey">
+                O
+                <div class="o-with-accents-container accent-container">
+                    <div data-key class="accent-o-1 accent-key">ò</div>
+                    <div data-key class="accent-o-2 accent-key">ô</div>
+                    <div data-key class="accent-o-3 accent-key">œ</div>
+                </div>
+            </div>
+            <div data-key class="key" id="pKey">P</div>
+        </div>
+        <div class="keyboard-row2 keyboard-row">
+            <div data-key class="key" id="aKey">
+                A
+                <div class="a-with-accents-container accent-container">
+                    <div data-key class="accent-a-1 accent-key">à</div>
+                    <div data-key class="accent-a-2 accent-key">â</div>
+                </div>
+            </div>
+            <div data-key class="key" id="sKey">S</div>
+            <div data-key class="key" id="dKey">D</div>
+            <div data-key class="key" id="fKey">F</div>
+            <div data-key class="key" id="gKey">G</div>
+            <div data-key class="key" id="hKey">H</div>
+            <div data-key class="key" id="jKey">J</div>
+            <div data-key class="key" id="kKey">K</div>
+            <div data-key class="key" id="lKey">L</div>
+        </div>
+        <div class="keyboard-row3 keyboard-row">
+            <div id="enterKey" class="key big-key enter-key">ENTER</div>
+            <div data-key class="key" id="zKey">Z</div>
+            <div data-key class="key" id="xKey">X</div>
+            <div data-key class="key" id="cKey">
+                C
+                <div class="c-with-accents-container accent-container">
+                    <div data-key class="accent-c-1 accent-key">ç</div>
+                </div>
+            </div>
+            <div data-key class="key" id="vKey">V</div>
+            <div data-key class="key" id="bKey">B</div>
+            <div data-key class="key" id="nKey">N</div>
+            <div data-key class="key" id="mKey">M</div>
+            <div id="backspaceKey" class="key big-key backspace-key"><ion-icon class="backspace" name="backspace-outline"></ion-icon></div>
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
