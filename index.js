@@ -1,7 +1,11 @@
-import JSONData from "../index.json" with { type: "json" }; // Import all the french words with at most 5 characters.
+import wordsWithAccents from "../wordWithAccents.json" with { type: "json" }; // Import all the french words with at most 5 characters.
+import wordsWithoutAccents from "../wordsNoAccents.json" with { type: "json" }; // Import all the french words with at most 5 characters.
 
-const words = JSONData.words;
-let currentWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
+
+const words = wordsWithAccents.words;
+const wordWithNoAccents = wordsWithoutAccents.words;
+
+let currentWord = words[Math.floor(Math.random() * words.length)];
 
 // Help/instructions menu elements
 const startPlayingBtn = document.getElementById("startPlayingButton");
@@ -12,6 +16,9 @@ const instructionsContainer = document.getElementById("instructionsContainer");
 const allKeys = document.querySelectorAll("[data-key]");
 const backspaceKey = document.getElementById("backspaceKey");
 const enterKey = document.getElementById("enterKey");
+
+// Game Over Elements 
+const playAgainBtn = document.getElementById("playAgainBtn");
 
 // row and column numbers to contral the board flow
 let rowIndex = 0;
@@ -80,6 +87,10 @@ window.addEventListener("keyup", e => {
     }, 200)
 })
 
+playAgainBtn.addEventListener("click", function(){
+    location.replace("//youtu.be/hEmODTcKJmE");
+})
+
 // FUNCTIONS //
 function deleteLetter(){
     let lastTile;
@@ -98,10 +109,13 @@ function deleteLetter(){
     currentLetter = lastLetter;
 }
 
-function updateOnEnter(){
 
+let isFlipAnimationOn = false;
+function updateOnEnter(){
+    const wordNoAccents = guess.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    if(isFlipAnimationOn) return; 
     // Check to make sure their guess is a full 5-letter word. If not, play the error animation and stop.
-    if(guess.length !== 5){
+    if(guess.length !== 5 || !wordWithNoAccents.includes(wordNoAccents.toLowerCase())){
         currentRowElement.style.animation = "row-shake 100ms linear alternate-reverse 2"
 
         setTimeout(() => { // Must clear animation so it can be used again
@@ -115,18 +129,20 @@ function updateOnEnter(){
     const time = 300; // Time per tile flip
     for(let i = 0; i < currentRow.length; i++){
         const tile = currentRow[i];
+        const frontOfTile = tile.children[0];
         const backOfTile = tile.children[1];
-        const numberElement = backOfTile.children[0].children[0]; // div.cell --> div.cell-back --> div.number-container --> p.number
+        const numberElement = backOfTile.children[0]; // div.cell --> div.cell-back --> div.number-container --> p.number
 
         verifyWord(backOfTile, i);
         numberElement.innerText = countOccurrencesInWord(guess[i]);
-
+        isFlipAnimationOn = true;
         tile.style.animation = `flip-tile ${time}ms linear forwards`;
         tile.style.animationDelay = `${time * i}ms`;
 
         setTimeout(function() {
             backOfTile.style.display = "flex";
             backOfTile.appendChild(document.createTextNode(guess[i]));
+            frontOfTile.style.display = "none";
         }, time * i + time/2)
     }
 
@@ -134,7 +150,7 @@ function updateOnEnter(){
     setTimeout(function() {
 
         if(guess == currentWord){
-            loadWinScreen();
+            loadGameOverScreen("Congratuations!!!", "You completed the word in " + (rowIndex + 1) + "attempts!");
             return;
         }
 
@@ -145,11 +161,12 @@ function updateOnEnter(){
             rowIndex += 1;
             loadRow();
         } else{
-            loadPlayAgainScreen();
+            loadGameOverScreen("You Loose!!!", "You could not complete the world within 6 attempts. The word was " + currentWord);
         }
-        
+        isFlipAnimationOn = false;
     },time * 5 + time/2) // time * 5 + time/2 is the total time the animation for 5 of the tiles will take. Only after that ends should we move to the next line.
 }
+
 
 function verifyWord(tile, index){
     let bgColor;
@@ -211,12 +228,14 @@ function addLetterToTile(letter){
 
 }
 
-function loadWinScreen(){
+function loadGameOverScreen(titleText, statsText){
+    blanket.style.display = "block";
 
-}
+    const titleElement = document.getElementById("gameOverTitle");
+    const statsTextElement = document.getElementById("statsTitle");
 
-function loadPlayAgainScreen(){
-
+    titleElement.innerText = titleText;
+    statsTextElement.innerText = statsText;
 }
 
 function toggleHelpMenu(){
