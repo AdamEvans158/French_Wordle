@@ -1,11 +1,11 @@
 import wordsWithAccents from "../wordWithAccents.json" with { type: "json" }; // Import all the french words with at most 5 characters.
-import wordsWithoutAccents from "../wordsNoAccents.json" with { type: "json" }; // Import all the french words with at most 5 characters.
+//import wordsWithoutAccents from "../wordsNoAccents.json" with { type: "json" }; // Import all the french words with at most 5 characters.
 
 
 const words = wordsWithAccents.words;
-const wordWithNoAccents = wordsWithoutAccents.words;
+//const wordWithNoAccents = wordsWithoutAccents.words;
 
-let currentWord = words[Math.floor(Math.random() * words.length)];
+let currentWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
 
 // Help/instructions menu elements
 const startPlayingBtn = document.getElementById("startPlayingButton");
@@ -112,10 +112,10 @@ function deleteLetter(){
 
 let isFlipAnimationOn = false;
 function updateOnEnter(){
-    const wordNoAccents = guess.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    //const wordNoAccents = guess.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     if(isFlipAnimationOn) return; 
     // Check to make sure their guess is a full 5-letter word. If not, play the error animation and stop.
-    if(guess.length !== 5 || !wordWithNoAccents.includes(wordNoAccents.toLowerCase())){
+    if(guess.length !== 5){
         currentRowElement.style.animation = "row-shake 100ms linear alternate-reverse 2"
 
         setTimeout(() => { // Must clear animation so it can be used again
@@ -161,14 +161,16 @@ function updateOnEnter(){
             rowIndex += 1;
             loadRow();
         } else{
-            loadGameOverScreen("You Loose!!!", "You could not complete the world within 6 attempts. The word was " + currentWord);
+            loadGameOverScreen("You Lose!!!", "You could not complete the world within 6 attempts. The word was " + currentWord);
         }
         isFlipAnimationOn = false;
+
     },time * 5 + time/2) // time * 5 + time/2 is the total time the animation for 5 of the tiles will take. Only after that ends should we move to the next line.
 }
 
 
 function verifyWord(tile, index){
+    console.log(guess, currentWord)
     let bgColor;
     if(guess[index] === currentWord[index]){
         bgColor = "#8ee418";
@@ -233,6 +235,9 @@ function loadGameOverScreen(titleText, statsText){
 
     const titleElement = document.getElementById("gameOverTitle");
     const statsTextElement = document.getElementById("statsTitle");
+
+    const container = document.getElementById("gameOverContainer");
+    container.style.display = "block";
 
     titleElement.innerText = titleText;
     statsTextElement.innerText = statsText;

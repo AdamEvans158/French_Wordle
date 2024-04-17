@@ -316,6 +316,26 @@ body{
     box-shadow: var(--fourth-neon-color) 0px 0px 10px;
 }
 
+.game-over-container{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    min-width: 40%;
+    width: 40%;
+    padding-inline: 30px;
+    padding-bottom: 30px;
+    height: 60%;
+    background-color: red;
+    z-index: 3;
+    display: none;
+    justify-content: center;
+}
+
+.play-again-btn{
+    width: 120px;
+    height: 50px;
+}
+
 @keyframes title-shadow {
     0%{
         text-shadow: var(--neon-white-color) 0px 0px 10px;
