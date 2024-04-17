@@ -325,10 +325,15 @@ body{
     padding-inline: 30px;
     padding-bottom: 30px;
     height: 60%;
-    background-color: red;
+    background-color: var(--secondary-dark-bg-color);
+    color: var(--neon-white-color);
+    text-shadow: var(--neon-white-color) 0px 0px 10px;
     z-index: 3;
     display: none;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
 }
 
 .play-again-btn{

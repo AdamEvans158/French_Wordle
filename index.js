@@ -150,7 +150,7 @@ function updateOnEnter(){
     setTimeout(function() {
 
         if(guess == currentWord){
-            loadGameOverScreen("Congratuations!!!", "You completed the word in " + (rowIndex + 1) + "attempts!");
+            loadGameOverScreen("Congratuations!!!", "You completed the word in " + (rowIndex + 1) + " attempts!");
             return;
         }
 
@@ -170,7 +170,6 @@ function updateOnEnter(){
 
 
 function verifyWord(tile, index){
-    console.log(guess, currentWord)
     let bgColor;
     if(guess[index] === currentWord[index]){
         bgColor = "#8ee418";
@@ -238,6 +237,7 @@ function loadGameOverScreen(titleText, statsText){
 
     const container = document.getElementById("gameOverContainer");
     container.style.display = "block";
+    container.style.animation = "help-menu-slide 150ms ease-in-out forwards";
 
     titleElement.innerText = titleText;
     statsTextElement.innerText = statsText;
