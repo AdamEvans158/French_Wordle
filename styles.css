@@ -322,6 +322,7 @@ body{
     transform: translateY(-50%);
     min-width: 40%;
     width: 40%;
+    min-width: 300px;
     padding-inline: 30px;
     padding-bottom: 30px;
     height: 60%;
@@ -333,12 +334,49 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+}
+
+.game-over-container h1, h2, p{
     text-align: center;
 }
 
+.rating-buttons-container{
+    display: flex;
+    justify-content: center;
+}
+
 .play-again-btn{
-    width: 120px;
-    height: 50px;
+    width: 200px;
+    padding: 10px;
+    padding-inline: 20px;
+    background-color: var(--third-dark-bg-color);
+    color: var(--neon-white-color);
+    box-shadow: var(--main-dark-bg-color) 0px 0px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 2rem;
+    text-shadow: var(--neon-white-color) 0px 0px 10px;
+}
+
+.rate-btn{
+    position: relative;
+    background-color: var(--third-dark-bg-color);
+    color: var(--neon-white-color);
+    border: var(--main-dark-bg-color) 3px solid;
+    font-size: xx-large;
+    padding: 5px;
+    width: 140px;
+    border: none;
+    box-shadow: var(--main-dark-bg-color) 0px 0px 10px;
+    text-shadow: var(--neon-white-color) 0px 0px 10px;
+    cursor: pointer;
+    margin-inline: 5px;
+    transition: all 500ms;
+}
+
+.rate-yes-btn{
+    z-index: 2;
 }
 
 @keyframes title-shadow {

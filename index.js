@@ -19,6 +19,9 @@ const enterKey = document.getElementById("enterKey");
 
 // Game Over Elements 
 const playAgainBtn = document.getElementById("playAgainBtn");
+const goodRatingBtn = document.getElementById("rateYesBtn");
+const badRatingBtn = document.getElementById("rateNoBtn");
+const ratingButtonsContainer = document.getElementById("ratingButtonsContainer");
 
 // row and column numbers to contral the board flow
 let rowIndex = 0;
@@ -88,7 +91,16 @@ window.addEventListener("keyup", e => {
 })
 
 playAgainBtn.addEventListener("click", function(){
-    location.replace("//youtu.be/hEmODTcKJmE");
+    window.open("https://youtu.be/hEmODTcKJmE?si=LJ0IFcYWspMGmplF");
+    location.reload();
+})
+
+badRatingBtn.addEventListener("click", function(){
+    slideRatingButtons();
+})
+
+goodRatingBtn.addEventListener("click", function(){
+    location.reload();
 })
 
 // FUNCTIONS //
@@ -236,7 +248,7 @@ function loadGameOverScreen(titleText, statsText){
     const statsTextElement = document.getElementById("statsTitle");
 
     const container = document.getElementById("gameOverContainer");
-    container.style.display = "block";
+    container.style.display = "flex";
     container.style.animation = "help-menu-slide 150ms ease-in-out forwards";
 
     titleElement.innerText = titleText;
@@ -262,4 +274,28 @@ function loadRow(){
     currentRow  = document.getElementsByClassName(`cell-in-row${rowIndex + 1}`);
     currentTile = currentRow[columnIndex];
     currentLetter = currentTile.children[0];
+}
+
+function slideRatingButtons(){
+    const time = 500; 
+    //badRatingBtn.style.animation = `slide-button-left ${time}ms linear forwards`;
+
+    const goodBtnPosition = goodRatingBtn.getBoundingClientRect();
+    const badBtnPosition = badRatingBtn.getBoundingClientRect();
+    const containerPos = ratingButtonsContainer.getBoundingClientRect();
+    const positionDif = badBtnPosition.x - goodBtnPosition.x;
+
+    console.log(goodBtnPosition, badBtnPosition, containerPos)
+
+    badRatingBtn.style.transform = `translateX(-${positionDif}px)`;
+
+    setTimeout(function(){
+        badRatingBtn.style.display = "none";
+        ratingButtonsContainer.style.display = "block";
+        //ratingButtonsContainer.style.textAlign = "left";
+        goodRatingBtn.style.left = `${goodBtnPosition.x - containerPos.x - 5}px`
+        //goodRatingBtn.style.transform = `translateX(${containerPos.width / 2 - goodBtnPosition.width / 2}px)`;
+    }, time + 50)
+
+    setTimeout(function(){alert("Press me now Chienne!")}, time * 2 + 50);
 }
